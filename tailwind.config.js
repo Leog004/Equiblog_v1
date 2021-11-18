@@ -12,7 +12,9 @@ module.exports = {
   
         lg: '30rem',
   
-        xl: '36rem',
+        xl: '40rem',
+
+        xxl: '50rem',
        },
     },
   },
