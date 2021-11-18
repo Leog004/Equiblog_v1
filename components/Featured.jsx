@@ -1,6 +1,21 @@
 import React from 'react'
 
-export default function Featured() {
+export default function Featured({brands}) {
+
+    function getBorderColor(brandName) {
+
+        console.log(brandName);
+
+        if(String(brandName).toLowerCase() === 'rattler') return 'border-red-400';
+        if(String(brandName).toLowerCase() === 'classic equine') return 'border-green-400';
+        if(String(brandName).toLowerCase() === 'martin saddlery') return 'border-yellow-800';
+        if(String(brandName).toLowerCase() === 'classic rope') return 'border-blue-400';
+        if(String(brandName).toLowerCase() === 'cashel') return 'border-yellow-400';
+
+        return 'border-red-200'
+    }
+
+
     return (
         <div className="py-20 px-0 max-w-6xl w-full mx-auto my-0">
             <div className="flex">
@@ -83,7 +98,17 @@ export default function Featured() {
                 <div className="flex flex-col w-1/3 gap-y-5">
                     <h1 className="text-gray-700 text-center font-semibold text-xl mb-10">Brands</h1>
                     
-                    <div className="bg-white w-3/5 mx-auto my-0 shadow-md rounded-xl px-6 py-6 flex items-center cursor-pointer border-b-2 border-green-400">
+
+                    {
+                        brands.map((el) => (
+                            <div className={`bg-white w-3/5 mx-auto my-0 shadow-md rounded-xl px-6 py-6 flex items-center cursor-pointer border-b-2 ${getBorderColor(el.brandName)}`}>
+                                <img className='w-auto h-4' src={el.brandImage.url} />
+                                <h3 className="mr-2 w-full text-right">{el.brandName}</h3>
+                            </div>  
+                        ))
+                    }
+
+                    {/* <div className="bg-white w-3/5 mx-auto my-0 shadow-md rounded-xl px-6 py-6 flex items-center cursor-pointer border-b-2 border-green-400">
                         <img className='w-auto h-4' src="https://classicequine.com/ce/assets/images/logo-ce-color.svg" />
                         <h3 className="mr-2 w-full text-right">Classic Equine</h3>
                     </div>
@@ -106,16 +131,16 @@ export default function Featured() {
                     <div className="bg-white w-3/5 mx-auto my-0 shadow-md rounded-xl px-6 py-6 flex items-center cursor-pointer border-b-2 border-yellow-400">
                         <img className='w-auto h-4' src="https://classicrope.com/images/Brands/CASHEL.png" />
                         <h3 className="mr-2 w-full text-right">Cashel</h3>
-                    </div>
+                    </div>*/}
 
                     <div className="bg-white h-full w-3/5 mx-auto my-0 shadow-md rounded-xl px-3 py-2 flex flex-col items-center cursor-pointer border-b-2 border-yellow-400">
                         <video className='h-full w-full overflow-hidden' controls={true} autoPlay={true} muted loop src="/video/Wild horses.mp4"/>
                         <p className="text-sm font-semibold text-gray-700">Feature Video</p>
-                    </div>
-{/* 
-                    <div className='h-full w-full align-end'>
+                    </div> 
+
+                    {/* <div className='h-full w-full align-end'>
                         <img className='w-2/3 mx-auto my-0' src="https://www.marketing91.com/wp-content/uploads/2020/06/COKE-Advertising-Example-Share-a-Coke-Campaign.jpg"/>
-                    </div> */}
+                    </div>  */}
 
                 </div>
             </div>
