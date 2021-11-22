@@ -1,6 +1,7 @@
 import React from 'react'
+import Link from 'next/link'
 
-export default function Featured({brands}) {
+export default function Featured({newBlogs, brands}) {
 
     function getBorderColor(brandName) {
 
@@ -8,7 +9,7 @@ export default function Featured({brands}) {
 
         if(String(brandName).toLowerCase() === 'rattler') return 'border-red-400';
         if(String(brandName).toLowerCase() === 'classic equine') return 'border-green-400';
-        if(String(brandName).toLowerCase() === 'martin saddlery') return 'border-yellow-800';
+        if(String(brandName).toLowerCase() === 'martin saddlery') return 'border-yellow-700';
         if(String(brandName).toLowerCase() === 'classic rope') return 'border-blue-400';
         if(String(brandName).toLowerCase() === 'cashel') return 'border-yellow-400';
 
@@ -20,11 +21,33 @@ export default function Featured({brands}) {
         <div className="py-20 px-0 max-w-6xl w-full mx-auto my-0">
             <div className="flex">
                 <div className="flex flex-col w-2/3">
-                    <h1 className="text-gray-700 font-semibold text-xl mb-10">Brand Featured</h1>
+                    <h1 className="text-gray-700 font-semibold text-xl mb-10">New Blogs</h1>
                     <div className="flex flex-wrap w-full gap-y-8 gap-x-3 justify-between">
 
+                        {
+                            newBlogs.map((el, index) => (
+                                <Link href={`/blog/${el.slug}`}>
+                                    <div className={`${index == 0 ? 'w-5/5' : 'w-60'} shadow-md rounded-xl px-6 py-6 bg-white cursor-pointer`}>
+                                        <button className={`${getBorderColor(el.brand.brandName).replace('border', 'bg')} px-6 py-1 rounded-md drop-shadow-md mb-4 text-white font-semibold text-sm`}>{el.brand.brandName}</button>
+                                        <h2 className="text-xl font-semibold my-5">{el.title}</h2>
+                                        <p className="text-gray-600">Lorem markdownum illic venturi instructa nobis Echidnae, cum quid magna fatebor. Levat placetque…</p>
+                                        <div className="flex mt-10">
+                                            <img className='w-12 h-12 shadow-md rounded-3xl' src="https://classicrope.com/cr/Images/ClassicLegacy/shop%2004.jpg" />
+                                            <div className="flex flex-col items-start">
+                                                <span className="text-md text-gray-500 ml-5">
+                                                    John Doe
+                                                </span>
+                                                <span className="text-sm text-gray-400 ml-5">
+                                                    April 16, 2020 
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </Link>                            
+                            ))
+                        }
 
-                        <div className="w-5/5 shadow-md rounded-xl px-6 py-6 bg-white cursor-pointer">
+                        {/* <div className="w-5/5 shadow-md rounded-xl px-6 py-6 bg-white cursor-pointer">
                             <button className="bg-blue-400 px-6 py-1 rounded-md drop-shadow-md mb-4 text-white font-semibold text-sm">Classic Rope</button>
                             <h2 className="text-xl font-semibold my-5">Our Most Valuable Asset</h2>
                             <p className="text-gray-600">Lorem markdownum illic venturi instructa nobis Echidnae, cum quid magna fatebor. Levat placetque…</p>
@@ -42,7 +65,7 @@ export default function Featured({brands}) {
                         </div>
 
                         <div className="w-60 shadow-md rounded-xl px-6 py-6 bg-white cursor-pointer">
-                            <button className="bg-green-400 px-6 py-1 rounded-md drop-shadow-md mb-4 text-white font-semibold text-sm">XpertEquine</button>
+                            <button className="bg-green-400 px-6 py-1 rounded-md drop-shadow-md mb-4 text-white font-semibold text-sm">Classic Equine</button>
                             <h2 className="text-xl font-semibold my-5">Our Most Valuable Asset</h2>
                             <p className="text-gray-600">Lorem markdownum illic venturi instructa nobis Echidnae, cum quid magna fatebor. Levat placetque…</p>
                             <div className="flex mt-10">
@@ -91,7 +114,7 @@ export default function Featured({brands}) {
                                     </span>
                                 </div>
                             </div>                        
-                        </div>  
+                        </div>   */}
 
                     </div>
                 </div>

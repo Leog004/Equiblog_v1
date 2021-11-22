@@ -16,10 +16,15 @@ export default function Hero() {
       }, []);
 
 
+    const changeImage = (el) => {
+        document.querySelector('#headerImage').style.backgroundImage = `${LinearGradient}, url(${el})`
+    }
+
+
     return (
 
         // Component Image
-        <div className="h-xl bg-red-200" style={{backgroundImage: `${LinearGradient},url(${HeaderImage})`, backgroundSize: 'cover'}}>
+        <div id='headerImage' className="h-xl bg-red-200 bg-center" style={{backgroundImage: `${LinearGradient},url(${HeaderImage})`, backgroundSize: 'cover'}}>
             
             <div className="flex h-full justify-between items-center max-w-6xl mx-auto my-0">
             {/* Welcome Texts */}
@@ -37,7 +42,7 @@ export default function Hero() {
 
                     
                         <Link href={`/blog/${el.slug}`}>
-                            <article className="bg-white py-1.5 pl-2 pr-2 rounded-xl shadow-lg cursor-pointer flex flex-wrap overflow-hidden border-l-8 border-green-300 hover:translate-x-4 hover:shadow-2xl hover:border-green-600 transition duration-300 ease-in-out">
+                            <article onMouseOver={() => changeImage(el.backgroundImage.url)} className="bg-white py-1.5 pl-2 pr-2 rounded-xl shadow-lg cursor-pointer flex flex-wrap overflow-hidden border-l-8 border-green-300 hover:translate-x-4 hover:shadow-2xl hover:border-green-600 transition duration-300 ease-in-out">
                             
                                 <img className="w-1/3 rounded-md" src={el.blogImage.url} />
                                 <div className="w-2/3 px-4">

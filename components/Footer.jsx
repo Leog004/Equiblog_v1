@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 export default function Footer() {
     return (
@@ -15,11 +16,11 @@ export default function Footer() {
                     {/* Navs */}
                     <nav className='flex flex-col w-full border-r-2 border-gray-50'>
                         <div className="hidden md:inline-flex h-full items-center justify-center flex-wrap">
-                            <a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Home</a>
-                            <a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Our Brands</a>
-                            <a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Contact</a>
-                            <a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Terms & Services</a>
-                            <a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Shop</a>
+                            <Link href={"/"}><a className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Home</a></Link>
+                            <Link href={"/blog"}><a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Our Blogs</a></Link>
+                            <Link href={"/contact"}><a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Contact</a></Link>
+                            <Link href={"/"}><a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Terms & Services</a></Link>
+                            <Link href={"/"}><a href="#" className="py-5 px-5 text-gray-400 text-sm font-semibold hover:text-gray-900">Shop</a></Link>
                         </div>
                     </nav>
 
