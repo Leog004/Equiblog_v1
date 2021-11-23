@@ -19,7 +19,6 @@ export default function ({post}) {
 
     }
 
-
     const getBorderColor = (brandName) => {
 
         if(String(brandName).toLowerCase() === 'rattler') return 'border-red-400';
@@ -83,7 +82,6 @@ export default function ({post}) {
       };
       
 
-
     return (
         <main className='w-full h-full bg-gray-100'>
             {/* // Component Image */}
@@ -126,7 +124,6 @@ export default function ({post}) {
                                 </div>
                             </div>
                         <hr/>
-
                         <div className='flex py-10 justify-between items-center'>
                             <div>
                                 <h2 className='text-xl text-gray-700 font-semibold'>Comments</h2>

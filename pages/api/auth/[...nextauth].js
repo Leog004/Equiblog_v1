@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from 'next-auth/providers/github'
 import { PrismaClient } from '.prisma/client';
 // import GitHubProvider from 'next-auth/providers/github'
 
@@ -9,6 +10,10 @@ const algorithm = "des-ecb";
 
 export default NextAuth({
     providers: [
+        GitHubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET
+          }),
         CredentialsProvider({
             name: 'your email',
             credentials: {
@@ -85,6 +90,7 @@ export default NextAuth({
 
             if(token?.notifications)
                 session.user.notifications = token.notifications
+
 
             return session
         },
