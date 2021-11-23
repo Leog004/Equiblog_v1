@@ -5,8 +5,6 @@ export default function Featured({newBlogs, brands}) {
 
     function getBorderColor(brandName) {
 
-        console.log(brandName);
-
         if(String(brandName).toLowerCase() === 'rattler') return 'border-red-400';
         if(String(brandName).toLowerCase() === 'classic equine') return 'border-green-400';
         if(String(brandName).toLowerCase() === 'martin saddlery') return 'border-yellow-700';

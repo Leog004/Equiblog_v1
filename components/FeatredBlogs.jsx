@@ -14,8 +14,6 @@ const LinearGradientBlogs = 'linear-gradient(rgb(238 238 238 / 26%) 25%, rgb(51,
 
 export default function FeatredBlogs({featuredBlogs}) {
 
-    console.log(featuredBlogs);
-
     return (
         <div className="h-xxl" style={{backgroundImage: `${LinearGradient}, url(${BackgroundImage})`}}>
             <h1 className="py-20 font-semibold text-3xl text-center">Featured Blogs</h1>

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { useSession } from 'next-auth/react';
 import moment from 'moment';
 import { getBlogsSlug, getblogDetails, getBrands } from '../../services';
 
@@ -8,6 +9,10 @@ export default function ({post}) {
 
 
     const [brands, setbrands] = useState([])
+
+    const {data: session, status} = useSession();
+
+    
 
     useEffect(() => {
         getBrands().then((result) => setbrands(result));
@@ -124,22 +129,22 @@ export default function ({post}) {
                                 </div>
                             </div>
                         <hr/>
-                        <div className='flex py-10 justify-between items-center'>
-                            <div>
-                                <h2 className='text-xl text-gray-700 font-semibold'>Comments</h2>
-                            </div>
-                            <div className='flex gap-4'>
-                                <button className='text-sm'>Sign In</button>
-                                <button className='text-sm border-gray-100 px-2 py-2 rounded-lg border-2'>Sign Up</button>
-                            </div>
-                        </div>
-                        <form className='flex w-full border-2 border-gray-200 rounded-lg h-28 shadow-inner'>
-                            <textarea className='px-12 py-10 w-full' name='comment' placeholder='Enter your comment here...'></textarea>
-                        </form>
 
-                        <button onClick={sumbitComment} className='bg-blue-700 rounded-lg px-3 py-2 flex text-white mt-5 self-start' type="button">Submit</button>
-
+                    {session && session.user.notifications && status ==='authenticated' ? (
+                        <><div className='flex py-10 justify-between items-center'>
+                                <div>
+                                    <h2 className='text-xl text-gray-700 font-semibold'>Comments</h2>
+                                </div>
+                                <div className='flex gap-4'>
+                                    <button className='text-sm'>Sign In</button>
+                                    <button className='text-sm border-gray-100 px-2 py-2 rounded-lg border-2'>Sign Up</button>
+                                </div>
+                            </div><form className='flex w-full border-2 border-gray-200 rounded-lg h-28 shadow-inner'>
+                                    <textarea className='px-12 py-10 w-full' name='comment' placeholder='Enter your comment here...'></textarea>
+                                </form><button onClick={sumbitComment} className='bg-blue-700 rounded-lg px-3 py-2 flex text-white mt-5 self-start' type="button">Submit</button></>
+                    ): <></>}
                 </div>
+
 
                     {/* <div className="flex flex-col bg-white shadow-sm py-10 px-12 rounded-lg w-2/3">
                         <h1 className="text-gray-700 font-semibold text-xl mb-10">Primo in altis pelle alumnae</h1>
