@@ -1,7 +1,9 @@
 import React from 'react'
 import { getProducts } from '../../services';
+import Link from 'next/link'
 
 export default function index({products}) {
+    console.log(products)
     return (
         <main class="my-8">
             <div class="container mx-auto px-6">
@@ -21,8 +23,14 @@ export default function index({products}) {
                                 <span class="text-gray-500 mt-2">{el.price}</span>
                             </div>
                             <div className='my-2 px-4 w-full text-right flex justify-between items-center'>
-                                <img className='h-4' src={el.brand.brandImage.url} />
-                                <a href={el.url} target='_blank' className='text-white text-sm shadow-sm px-3 py-2 mt-2 bg-blue-600 rounded-md'>View Now</a>
+                                <img className='h-4 hover:h-5 cursor-pointer transform transition-all duration-200' src={el.brand.brandImage.url} />
+                                {
+                                    el.isShoppible
+                                    ? <Link href={`/product/${el.slug}`}><button type='button' className='text-white text-sm shadow-sm px-3 py-2 mt-2 hover:bg-blue-700 bg-blue-600 rounded-md'>Buy Now</button></Link>
+
+                                    :  <a href={el.url} target='_blank' className='text-white text-sm shadow-sm px-3 py-2 mt-2 hover:bg-blue-700 bg-blue-600 rounded-md'>View Product</a>
+
+                                }
                             </div>
                         </div>
                     ))

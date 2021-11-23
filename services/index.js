@@ -228,7 +228,9 @@ export const getBrands = async () => {
             }
           }
           id
+          isShoppible
           price
+          slug
           title
           url
           image {
@@ -243,3 +245,60 @@ export const getBrands = async () => {
     return result.products;
 
   }
+
+
+  export const getProductsSlug = async () => {
+    
+    const query = gql`
+    
+      query MyQuery {
+        productsConnection {
+          edges {
+            node {
+              title
+              price
+              description
+              url
+              slug
+              brand {
+                brandName
+              }
+              image {
+                url
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const result = await request(graphqlAPI, query);
+    return result.productsConnection.edges;
+
+  } 
+
+
+  export const getProductDetails = async (slug) => {
+    const query = gql`
+      query getProductDetails($slug : String!) {
+        product(where: {slug: $slug}) {
+          title
+          price
+          url
+          description
+          slug
+          brand {
+            brandName
+          }
+          image {
+            url
+          }
+        }
+      }
+    `;
+  
+    const result = await request(graphqlAPI, query, { slug });
+  
+    return result.product;
+  };
+  
