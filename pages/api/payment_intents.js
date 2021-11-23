@@ -3,7 +3,8 @@ const stripe = new Stripe(process.env.STRIP_S);
 
 export default async (req, res) => {
   
-  if (req.method === "POST") {
+
+  if (req.method === 'POST') {
     try {
       const { amount } = req.body;
       // Psst. For production-ready applications we recommend not using the

@@ -42,7 +42,7 @@ export default function ({product}) {
         </section> : <h1 className='text-2xl text-gray-700 w-full text-center my-10 font-semibold'>Product Not Found</h1>
         }
 
-        { showShop && <ShippingForm image={product.image.url}/>}
+        { showShop && <ShippingForm image={product.image.url} payment={product.price}/>}
         </Elements>
     )
 }
