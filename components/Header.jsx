@@ -1,7 +1,13 @@
+
+import { signIn, signOut, useSession} from 'next-auth/react'
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/dist/client/router';
 
 export default function Header() {
+
+    const {data: session} = useSession();
+    const router = useRouter();
 
     const handleMobileNav = (e) => {
         e.preventDefault();
@@ -11,8 +17,8 @@ export default function Header() {
     const handleDropDown = (e) => {
         e.preventDefault();
         document.querySelector('#dropdown').classList.toggle('hidden')
-    }
-
+    } 
+ 
     const handleDropDownAway = (e) => {
         e.preventDefault();
 
@@ -97,6 +103,13 @@ export default function Header() {
                     </a>
                     <Link href="/blog" ><a className="py-5 px-3 text-gray-400 text-sm font-semibold hover:text-gray-900">Blogs</a></Link>
                     <Link href="#"><a className="py-5 px-3 text-gray-400 text-sm font-semibold hover:text-gray-900">Feature Products</a></Link>
+                 {
+                    session
+                    ? <button onClick={() => signOut()} className='py-2 px-3 rounded-lg text-white bg-red-600 text-sm font-semibold hover:text-gray-900'>Log Out</button>
+                    :  <button onClick={() => signIn()} className='py-2 px-3 rounded-lg text-white bg-yellow-400 text-sm font-semibold hover:text-gray-900'>Log In</button>
+
+                 }
+                 
                  </div>
 
                  <div class="p-10">

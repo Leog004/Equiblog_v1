@@ -103,17 +103,17 @@ export default function index() {
                             <form className='w-1/2 my-10 mx-auto grid grid-cols-2 gap-5 justify-between'>
                                 <div className='flex flex-col w-full'>
                                     <label className='text-gray-700 text-lg font-semibold leading-10'>First Name</label>
-                                    <input value={formData.firstName} onChange={onInputChange} className='bg-gray-200 py-2 px-5 rounded-md' type='text' placeholder='first-name' name='firstName' />
+                                    <input value={formData.firstName} onChange={onInputChange} className='bg-gray-200 py-2 px-5 rounded-md' type='text' placeholder='first-name' name='firstName'  required />
                                 </div>
 
                                 <div className='flex flex-col w-full'>
                                     <label className='text-gray-700 text-lg font-semibold leading-10'>Last Name</label>
-                                    <input value={formData.lastName} onChange={onInputChange} className='bg-gray-200 py-2 px-5 rounded-md' type='text' placeholder='last-name' name='lastName' />
+                                    <input value={formData.lastName} onChange={onInputChange} className='bg-gray-200 py-2 px-5 rounded-md' type='text' placeholder='last-name' name='lastName'  required />
                                 </div>
 
                                 <div className='flex flex-col w-full col-span-2'>
                                     <label className='text-gray-700 text-lg font-semibold leading-10'>Email</label>
-                                    <input value={formData.email} onChange={onInputChange} className='bg-gray-200 py-2 px-5 rounded-md' type='text' placeholder='your email' name='email' />
+                                    <input value={formData.email} onChange={onInputChange} className='bg-gray-200 py-2 px-5 rounded-md' type='text' placeholder='your email' name='email'  required />
                                 </div>
 
                                 <div className='flex flex-col w-full col-span-2'>
@@ -121,7 +121,7 @@ export default function index() {
                                     <textarea value={formData.message}  onChange={onInputChange} className='bg-gray-200 py-2 px-5 h-sm rounded-md' type='text' placeholder='Message...' name='message'></textarea>
                                 </div>
 
-                                <button  onClick={submitHandler} className='bg-blue-700 px-2 py-3 text-white rounded-lg' type='button'>Submit</button>
+                                <button onClick={submitHandler} className='bg-blue-700 px-2 py-3 text-white rounded-lg' type='button'>Submit</button>
                             </form>
                         </div>
 

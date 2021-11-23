@@ -1,0 +1,290 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Addresses {
+  ID           Int       @id(map: "PK_Addresses") @default(autoincrement())
+  Type         String?   @db.NVarChar(50)
+  CustomerID   Int?
+  Name         String?   @db.NVarChar(150)
+  Address      String?   @db.NVarChar(150)
+  Address_2    String?   @map("Address 2") @db.NVarChar(150)
+  City         String?   @db.NVarChar(50)
+  State        String?   @db.NVarChar(50)
+  Zip          String?   @db.NVarChar(50)
+  Phone        String?   @db.NVarChar(50)
+  DateAdded    DateTime? @default(now(), map: "DF_Addresses_DateAdded") @db.Date
+  DateModified DateTime? @db.Date
+}
+
+model Customers_Messages {
+  ID        Int       @id(map: "PK_Customers_Messages") @default(autoincrement())
+  Name      String?   @db.NVarChar(50)
+  Email     String?   @db.NVarChar(50)
+  Message   String?   @db.NVarChar(4000)
+  DateAdded DateTime? @default(now(), map: "DF_Customers_Messages_DateAdded") @db.Date
+  Phone     String?   @db.NVarChar(50)
+}
+
+model Order_Details {
+  OrderDetailsID Int       @id(map: "PK_Order_Details") @default(autoincrement())
+  OrderHeaderID  Int?
+  ProductNumber  String?   @db.NVarChar(50)
+  UnitQuantity   Int?      @default(0, map: "DF_Order_Details_UnitQuantity")
+  UnitPrice      Decimal?  @default(0.00, map: "DF_Order_Details_UnitPrice") @db.Decimal(22, 2)
+  UnitTotal      Decimal?  @default(0.00, map: "DF_Order_Details_UnitTotal") @db.Decimal(22, 2)
+  ModifiedDate   DateTime? @default(now(), map: "DF_Order_Details_ModifiedDate") @db.DateTime
+}
+
+model Order_Header {
+  OrderHeaderID       Int       @id(map: "PK_Order_Header") @default(autoincrement())
+  CustomerID          Int?
+  CustomerOrderNumber String?   @db.NVarChar(50)
+  OrderDate           DateTime? @default(now(), map: "DF_Order_Header_OrderDate") @db.DateTime
+  BillingAddressID    Int?
+  ShippingAddressID   Int?
+  SubTotalAmt         Decimal?  @default(0.00, map: "DF_Order_Header_SubTotalAmt") @db.Decimal(22, 2)
+  TaxAmt              Decimal?  @default(0.00, map: "DF_Order_Header_TaxAmt") @db.Decimal(22, 2)
+  ShippingAmt         Decimal?  @default(0.00, map: "DF_Order_Header_ShippingAmt") @db.Decimal(22, 2)
+  ShippingDiscount    Decimal?  @default(0.00, map: "DF_Order_Header_ShippingDiscount") @db.Decimal(22, 2)
+  ProductDiscount     Decimal?  @default(0.00, map: "DF_Order_Header_ProductDiscount") @db.Decimal(22, 2)
+  DiscountID          Int?
+  TotalAmt            Decimal?  @default(0.00, map: "DF_Order_Header_TotalAmt") @db.Decimal(22, 2)
+  Comments            String?   @db.NVarChar(Max)
+  ModifiedDate        DateTime? @default(now(), map: "DF_Order_Header_ModifiedDate") @db.DateTime
+  DateAdded           DateTime? @default(now(), map: "DF_Order_Header_DateAdded") @db.DateTime
+  Email               String?   @db.NVarChar(50)
+  Invoice             String?   @db.NVarChar(50)
+  InvoiceDate         DateTime? @db.DateTime
+  TrackingNumber      String?   @db.NVarChar(150)
+  ShippingCarrier     String?   @db.NVarChar(150)
+  CC                  String?   @db.NVarChar(50)
+}
+
+model Order_ShoppingCart {
+  ShoppingCartID Int      @id(map: "PK_Order_ShoppingCart_ShoppingCartID") @default(autoincrement())
+  CartID         String   @db.NVarChar(50)
+  No_            String   @db.NVarChar(150)
+  Name           String?  @db.NVarChar(150)
+  Quantity       Int?     @default(1, map: "DF_Order_ShoppingCart_Quantity")
+  Price          Decimal? @db.Decimal(22, 2)
+  Freight        Decimal? @default(0.00, map: "DF_Order_ShoppingCart_Freight") @db.Decimal(22, 2)
+  SubTotal       Decimal? @db.Decimal(22, 2)
+  Total          Decimal? @db.Decimal(22, 2)
+  DateCreated    DateTime @default(now(), map: "DF_Order_ShoppingCart_DateCreated") @db.DateTime
+  ModifiedDate   DateTime @default(now(), map: "DF_Order_ShoppingCart_ModifiedDate") @db.DateTime
+}
+
+model Page_Pages {
+  ID                Int       @id(map: "PK_Page_Pages") @default(autoincrement())
+  Page              String?   @db.NVarChar(50)
+  URL               String?   @db.NVarChar(150)
+  HeaderImage       String?   @db.NVarChar(150)
+  HeaderImageTitle  String?   @db.NVarChar(250)
+  HeaderImageALT    String?   @db.NVarChar(150)
+  MetaDescription   String?   @db.NVarChar(350)
+  MetaKeyWords      String?   @db.NVarChar(350)
+  PageTitle         String?   @db.NVarChar(150)
+  TabTitle          String?   @db.NVarChar(150)
+  Description_Title String?   @map("Description Title") @db.NVarChar(150)
+  Description       String?   @db.NVarChar(4000)
+  Description_2     String?   @map("Description 2") @db.NVarChar(4000)
+  Description_3     String?   @map("Description 3") @db.NVarChar(4000)
+  SubDescription    String?   @db.NVarChar(500)
+  Brand             String?   @db.NVarChar(50)
+  NavBar            Boolean?
+  Footer            Boolean?
+  DateCreated       DateTime? @default(now(), map: "DF_Page_Pages_DateCreated") @db.DateTime
+}
+
+model pagecontent {
+  id                 Int       @id(map: "PK_c65dc99e49ced4e56f4f496c3b7") @default(autoincrement())
+  Page_Location      String    @db.NVarChar(255)
+  Page_Content       String    @db.NVarChar(255)
+  Title              String?   @db.NVarChar(500)
+  TitleText          String?   @db.NVarChar(500)
+  SubTitle           String?   @db.NVarChar(500)
+  SubTitleText       String?   @db.NVarChar(500)
+  SpanText           String?   @db.NVarChar(500)
+  ButtonText         String?   @db.NVarChar(500)
+  ButtonURL          String?   @db.NVarChar(500)
+  Paragraph          String?   @db.NVarChar(500)
+  SecondaryParagraph String?   @db.NVarChar(500)
+  ImageURL           String?   @db.NVarChar(500)
+  LogoImageURL       String?   @db.NVarChar(500)
+  QouteAuthor        String?   @db.NVarChar(500)
+  OrderBy            Int?
+  DateAdded          DateTime? @db.DateTime
+}
+
+model pageinnercontent {
+  id                  Int       @id(map: "PK_d72fc3bc41269872dbf9df825ec") @default(autoincrement())
+  ContentID           Int
+  Title               String?   @db.NVarChar(500)
+  TitleText           String?   @db.NVarChar(500)
+  SubTitle            String?   @db.NVarChar(500)
+  SubTitleText        String?   @db.NVarChar(500)
+  Paragraph           String?   @db.NVarChar(500)
+  Secondaryparaphraph String?   @db.NVarChar(500)
+  ImageURL            String?   @db.NVarChar(500)
+  ButtonText          String?   @db.NVarChar(500)
+  ButtonURL           String?   @db.NVarChar(500)
+  DateAdded           DateTime? @db.DateTime
+  VideoURL            String?   @db.NVarChar(500)
+}
+
+model Product_Category {
+  ID                Int      @id(map: "PK_Product_Category") @default(autoincrement())
+  Name              String?  @db.NVarChar(50)
+  Description       String?  @db.NVarChar(Max)
+  NavName           String?  @db.NVarChar(50)
+  NavDescription    String?  @db.NVarChar(250)
+  ImageURL          String?  @db.NVarChar(150)
+  Image_Alt         String?  @map("Image Alt") @db.NVarChar(250)
+  Meta_Description  String?  @map("Meta Description") @db.NVarChar(300)
+  Meta_Keywords     String?  @map("Meta Keywords") @db.NVarChar(300)
+  Show_On_Web       Boolean? @default(true, map: "DF_Product_Category_Show On Web") @map("Show On Web")
+  Admin_Show_On_Web Boolean? @default(true, map: "DF_Product_Category_Admin Show On Web") @map("Admin Show On Web")
+  Image_TItle       String?  @map("Image TItle") @db.NVarChar(500)
+  Type              String?  @db.VarChar(255)
+  TypeImageUrl      String?  @db.VarChar(255)
+}
+
+model Product_Category_List {
+  ID           Int      @id(map: "PK_Product_Category_List") @default(autoincrement())
+  CategoryID   Int?
+  ProductID    Int?
+  Nav_Inserted Boolean? @default(false, map: "DF_Product_Category_List_Nav Inserted") @map("Nav Inserted")
+}
+
+model Product_Freight {
+  FreightID           Int      @id(map: "PK_Product_Freight") @default(autoincrement())
+  Freight_Legend_Low  Decimal? @default(0, map: "DF_Product_Freight_Freight Legend Low") @map("Freight Legend Low") @db.Decimal(22, 2)
+  Freight_Legend_High Decimal? @default(0, map: "DF_Product_Freight_Freight Legend High") @map("Freight Legend High") @db.Decimal(22, 2)
+  Freight_Cost        Decimal? @default(0, map: "DF_Product_Freight_Freight Cost") @map("Freight Cost") @db.Decimal(22, 2)
+}
+
+model Product_Products {
+  ID                         Int       @id(map: "PK_Product-Products_1") @default(autoincrement())
+  No_                        String?   @db.NVarChar(100)
+  MasterSku                  String?   @db.NVarChar(100)
+  Name                       String?   @db.NVarChar(100)
+  Description                String?   @db.NVarChar(4000)
+  Description_2              String?   @map("Description 2") @db.NVarChar(4000)
+  Unit_Price                 Decimal?  @default(0, map: "DF_Product-Products_1_Unit Price") @map("Unit Price") @db.Decimal(22, 2)
+  Unit_List_Price            Decimal?  @default(0, map: "DF_Product-Products_1_Unit List Price") @map("Unit List Price") @db.Decimal(22, 2)
+  Map_Price                  Decimal?  @default(0, map: "DF_Product-Products_1_Map Price") @map("Map Price") @db.Decimal(22, 4)
+  Sale_Price                 Decimal?  @default(0, map: "DF_Product-Products_1_Sale Price") @map("Sale Price") @db.Decimal(22, 4)
+  Global_Dimension_1_Code    String?   @map("Global Dimension 1 Code") @db.NVarChar(100)
+  Item_Category_Code         String?   @map("Item Category Code") @db.NVarChar(100)
+  Product_Group_Code         String?   @map("Product Group Code") @db.NVarChar(100)
+  Item_Type                  String?   @map("Item Type") @db.NVarChar(100)
+  Quantity_On_Hand           Int?      @default(0, map: "DF_Product-Products_1_Quantity On Hand") @map("Quantity On Hand")
+  Length                     Decimal?  @default(0, map: "DF_Product-Products_1_Length") @db.Decimal(22, 4)
+  Width                      Decimal?  @default(0, map: "DF_Product-Products_1_Width") @db.Decimal(22, 4)
+  Height                     Decimal?  @default(0, map: "DF_Product-Products_1_Height") @db.Decimal(22, 4)
+  Weight                     Decimal?  @default(0, map: "DF_Product-Products_1_Weight") @db.Decimal(22, 4)
+  Color                      String?   @db.NVarChar(100)
+  Size                       String?   @db.NVarChar(100)
+  Lay                        String?   @db.NVarChar(100)
+  Style                      String?   @db.NVarChar(100)
+  Order                      Int?
+  ImageURL                   String?   @db.NVarChar(200)
+  Retail_Web                 Boolean?  @default(false, map: "DF_Product-Products_1_Retail Web") @map("Retail Web")
+  Discontinued_Item          Boolean?  @default(false, map: "DF_Product-Products_1_Discontinued Item") @map("Discontinued Item")
+  Blocked                    Boolean?  @default(false, map: "DF_Product-Products_1_Blocked")
+  Show_On_Web                Boolean?  @default(true, map: "DF_Product-Products_1_Show On Web") @map("Show On Web")
+  Admin_Show_On_Web          Boolean?  @default(true, map: "DF_Product-Products_1_Admin Show On Web") @map("Admin Show On Web")
+  isNew                      Boolean?  @default(true, map: "DF_Product-Products_1_isNew")
+  Date_Added                 DateTime? @default(now(), map: "DF_Product-Products_1_Date Added") @map("Date Added") @db.Date
+  Date_Updated               DateTime? @default(now(), map: "DF_Product-Products_1_Date Updated") @map("Date Updated") @db.Date
+  Default_Image              Boolean?  @default(false, map: "DF_Product-Products_1_Default Image") @map("Default Image")
+  MetaDescription            String?
+  MetaKeyWords               String?   @db.NVarChar(300)
+  Style_Is_Image             Boolean?  @default(false, map: "DF_Product_Products_1_Style Is Image") @map("Style Is Image")
+  Color_Is_Image             Boolean?  @default(false, map: "DF_Product_Products_1_Color Is Image") @map("Color Is Image")
+  Product_Type_Link          String?   @map("Product Type Link") @db.NVarChar(50)
+  ImageALT                   String?   @db.NVarChar(500)
+  Meta_Title                 String?   @map("Meta Title") @db.NVarChar(100)
+  Admin_Updated              Boolean?  @default(false, map: "DF_Product_Products_1_Admin Updated") @map("Admin Updated")
+  Image_Title                String?   @map("Image Title") @db.NVarChar(300)
+  Type                       String?   @db.NVarChar(100)
+  Location_Code              String?   @map("Location Code") @db.NVarChar(50)
+  Admin_Location_Code        String?   @map("Admin Location Code") @db.NVarChar(50)
+  Type_Is_Image              Boolean?  @default(false, map: "DF_Product_Products_1_Type Is Image") @map("Type Is Image")
+  NYC                        Boolean?  @default(false, map: "DF_Product_Products_1_NYC")
+  Details_Header_Image       String?   @map("Details Header Image") @db.NVarChar(150)
+  Details_Header_Image_Alt   String?   @map("Details Header Image Alt") @db.NVarChar(500)
+  Details_Header_Image_Title String?   @map("Details Header Image Title") @db.NVarChar(300)
+  Map_Difference_Price       Decimal?  @map("Map Difference Price") @db.Decimal(22, 4)
+  Map_Differenc_Percent      Decimal?  @map("Map Differenc Percent") @db.Decimal(22, 4)
+  Show_Add_To_Cart           Boolean?  @default(true, map: "DF_Product_Products_Show Add To Cart") @map("Show Add To Cart")
+  Main_Image                 Boolean?  @default(false, map: "DF_Product_Products_Main Image") @map("Main Image")
+  Filter                     String?   @db.NVarChar(255)
+  Web_Deal                   Boolean?  @default(false, map: "DF_Product_Products_Deal") @map("Web Deal")
+  AlertQuantity              Boolean?  @default(true, map: "DF_Product_Products_AlertQuantity")
+  AmazonLink                 String?   @db.NVarChar(150)
+  ShowAmazonLink             Boolean?  @default(false, map: "DF__Product_P__ShowA__3F466844")
+  alernateName               String?   @db.NVarChar(200)
+  alernateDescription        String?
+  Video                      String?   @db.NVarChar(200)
+  ShowVideo                  Boolean?  @default(false, map: "DF__Product_P__ShowV__4222D4EF")
+  Discount_Percent           Decimal?  @map("Discount Percent") @db.Decimal(22, 3)
+  IndividualVideo            String?   @db.NVarChar(200)
+  ShowIndVideo               Boolean?
+  Cataloged                  Boolean?  @default(false, map: "DF__Product_P__Catal__4316F928")
+  ImageAvailable             Boolean?  @default(false, map: "DF__Product_P__Image__440B1D61")
+}
+
+model Product_SubCategory {
+  ID                Int      @id(map: "PK_Product_SubCategory") @default(autoincrement())
+  Name              String?  @db.NVarChar(50)
+  Description       String?  @db.NVarChar(Max)
+  NavName           String?  @db.NVarChar(50)
+  NavDescription    String?  @db.NVarChar(250)
+  ImageURL          String?  @db.NVarChar(150)
+  Image_Alt         String?  @map("Image Alt") @db.NVarChar(250)
+  Meta_Description  String?  @map("Meta Description") @db.NVarChar(500)
+  Meta_Keywords     String?  @map("Meta Keywords") @db.NVarChar(300)
+  Show_On_Web       Boolean? @default(true, map: "DF_Product_SubCategory_Show On Web") @map("Show On Web")
+  Admin_Show_On_Web Boolean? @default(true, map: "DF_Product_SubCategory_Admin Show On Web") @map("Admin Show On Web")
+  Image_Title       String?  @map("Image Title") @db.NVarChar(500)
+  LandingImage      String?
+}
+
+model Product_SubCategory_List {
+  ID            Int      @id(map: "PK_Product_SubCategory_List") @default(autoincrement())
+  SubCategoryID Int?
+  ProductID     Int?
+  Nav_Inserted  Boolean? @default(false, map: "DF_Product_SubCategory_List_Nav Inserted") @map("Nav Inserted")
+}
+
+model Product_Tax {
+  ID        Int      @id(map: "PK_Product_Tax") @default(autoincrement())
+  StateCode String?  @db.NVarChar(50)
+  Tax       Decimal? @db.Decimal(22, 5)
+}
+
+model Users {
+  UserID              Int       @id(map: "PK_Users") @default(autoincrement())
+  First_Name          String?   @map("First Name") @db.NVarChar(150)
+  Last_Name           String?   @map("Last Name") @db.NVarChar(150)
+  Email               String?   @db.NVarChar(150)
+  Password            String?   @db.NVarChar(150)
+  Shipping_Address_ID Int?      @map("Shipping Address ID")
+  Billing_Adderss_ID  Int?      @map("Billing Adderss ID")
+  Notifications       Boolean?  @default(true, map: "DF_Users_Notifications")
+  DOB                 DateTime? @db.Date
+  Phone               String?   @db.NVarChar(150)
+  Last_Log            DateTime? @default(now(), map: "DF_Users_Last Log") @map("Last Log") @db.Date
+  Date_Updated        DateTime? @default(now(), map: "DF_Users_Date Updated") @map("Date Updated") @db.Date
+  Date_Added          DateTime? @default(now(), map: "DF_Users_Date Added") @map("Date Added") @db.Date
+  Newsletters         Boolean?  @default(true, map: "DF_Users_Newsletters")
+  Horse_Number        String?   @map("Horse Number") @db.NVarChar(50)
+  Region              String?   @db.NVarChar(50)
+}

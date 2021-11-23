@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react'
 import { getBlogs } from '../../services';
 import Link from 'next/link'
 import { Pagination } from '../../components';
+import { PrismaClient } from '.prisma/client';
+import safeJsonStringify from 'safe-json-stringify';
+import { getSession } from 'next-auth/react';
 
-
+const prisma = new PrismaClient();
 const HeaderImage = 'https://images.unsplash.com/flagged/photo-1557296126-953ce119454c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80';
 const LinearGradient = 'linear-gradient(0deg, #9f9effeb 0%, #0065c670 20%)'
 
-export default function Blogs({blogs}) {
+export default function Blogs({blogs, pages, sData}) {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(6);
@@ -17,6 +20,8 @@ export default function Blogs({blogs}) {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
 
+    // console.log(pages);
+    // console.log(sData);
 
     // change page
     const paginate = (pageNumber) => {
@@ -117,12 +122,47 @@ export default function Blogs({blogs}) {
 
 
 // Fetch data at build time
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
 
-    const blogs = (await getBlogs()) || [];
+    const session = await getSession(context);
+    console.log(session);
 
+    if(!session){
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false
+            }
+        };
+    }
+
+    try{
+
+        const blogs = (await getBlogs()) || [];
+
+        
+        const pages = await prisma.customers_Messages.findMany({
+            select: {
+                Name: true,
+                Message: true,
+                Phone: true
+            }
+        });
+
+        const rawSQL = '_G_Users';
+        const result = await prisma.$queryRawUnsafe(`${rawSQL}`);
+
+        const stringifyData = safeJsonStringify(result);
+        const sData = JSON.parse(stringifyData);
+
+
+        return {
+            props: { blogs, pages, sData },
+          };
+
+    }catch(err){
+        console.log(err);
+    }
     
-    return {
-      props: { blogs },
-    };
+
   }

@@ -6,19 +6,26 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prisma/client": "^3.5.0",
+    "crypto": "^1.0.1",
+    "cryptr": "^6.0.2",
     "graphql": "^15.7.2",
     "graphql-request": "^3.6.1",
     "html-parser": "^0.11.0",
     "moment": "^2.29.1",
     "next": "latest",
+    "next-auth": "^4.0.0-beta.7",
+    "node-jose-tools": "^1.6.28",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-multi-carousel": "^2.6.5",
-    "react-toastify": "^8.1.0"
+    "react-toastify": "^8.1.0",
+    "safe-json-stringify": "^1.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
+    "prisma": "^3.5.0",
     "tailwindcss": "^2.2.4"
   }
 }
