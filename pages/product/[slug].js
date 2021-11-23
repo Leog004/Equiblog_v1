@@ -1,12 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { ShippingForm } from '../../components';
 import { getProductDetails, getProductsSlug } from '../../services';
+
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+const stripePromise = loadStripe('pk_test_TaVn2jvIdYAuA8ZwVRqQF1YA');
 
 export default function ({product}) {
 
+    const [showShop, setShowShop] = useState(false)
+
+    const isReader = (e) => {
+        e.preventDefault();
+       
+        setShowShop(true);
+    }
+    
+
     return (
-        <>
+        <Elements stripe={stripePromise}>
         {
             product ?
+            
         <section class="text-gray-700 body-font overflow-hidden bg-white">
                 <div class="container px-5 py-24 mx-auto">
                     <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -19,14 +34,16 @@ export default function ({product}) {
                         <p class="leading-relaxed mt-10">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
                         <div class="mt-10 pb-5 border-b-2 border-gray-200 mb-5"></div>
                         <div class="flex">
-                        <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Buy Now</button>
+                        <button onClick={isReader} type='button' class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Buy Now</button>
                         </div>
                     </div>
                     </div>
                 </div>
         </section> : <h1 className='text-2xl text-gray-700 w-full text-center my-10 font-semibold'>Product Not Found</h1>
         }
-        </>
+
+        { showShop && <ShippingForm image={product.image.url}/>}
+        </Elements>
     )
 }
 

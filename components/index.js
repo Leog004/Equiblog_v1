@@ -5,3 +5,4 @@ export { default as Featured } from './Featured';
 export { default as FeaturedBlogs } from './FeatredBlogs';
 export { default as Subscribe } from './Subscribe';
 export { default as Pagination } from './Pagination';
+export { default as ShippingForm } from './ShippingForm';

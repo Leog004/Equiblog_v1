@@ -302,3 +302,12 @@ export const getBrands = async () => {
     return result.product;
   };
   
+
+  export const submitPayment = async (payment) => {
+
+    const { data: clientSecret } = await axios.post("/api/payment_intents", {
+        amount: payment * 100
+    });
+  
+    return clientSecret;
+  };
