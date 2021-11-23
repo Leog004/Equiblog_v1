@@ -57,6 +57,7 @@ export default NextAuth({
                         name: `${result[0]['First Name']} ${result[0]['Last Name']}`,
                         email: result[0]['Email'],
                         notifications: result[0]['Notifications'],
+                        privaleges: result[0]['Privaleges']
                     };
                 }else{
                     return null;
@@ -80,6 +81,9 @@ export default NextAuth({
 
                 if(user?.notifications)
                     token.notifications = user.notifications;
+
+                if(user?.privaleges)
+                    token.privaleges = user.privaleges;
             }
     
             return token
@@ -91,6 +95,8 @@ export default NextAuth({
             if(token?.notifications)
                 session.user.notifications = token.notifications
 
+            if(token?.privaleges)
+                session.privaleges = token.privaleges;
 
             return session
         },

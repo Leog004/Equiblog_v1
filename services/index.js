@@ -213,3 +213,33 @@ export const getBrands = async () => {
   
     return result.json();
   };
+
+
+  export const getProducts = async () => {
+
+    const query = gql`
+    
+      query GetProducts {
+        products {
+          brand {
+            brandName
+            brandImage {
+              url
+            }
+          }
+          id
+          price
+          title
+          url
+          image {
+            url
+          }
+        }
+      }
+    `;
+
+    const result = await request(graphqlAPI, query);
+
+    return result.products;
+
+  }

@@ -287,4 +287,5 @@ model Users {
   Newsletters         Boolean?  @default(true, map: "DF_Users_Newsletters")
   Horse_Number        String?   @map("Horse Number") @db.NVarChar(50)
   Region              String?   @db.NVarChar(50)
+  Privaleges          Int       @default(0, map: "DF_Users_Privaleges")
 }

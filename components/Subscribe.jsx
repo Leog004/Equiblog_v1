@@ -59,9 +59,13 @@ export default function Subscribe() {
         submitComment(commentObj)
           .then((res) => {
               if(res.createSubscriber){
-                return successMessage();
+                formData.email = '';
+                setError(true);
+                successMessage();
               }
           }).catch((err) => {
+              formData.email = '';
+              setError(true);
               errorMessage('User has already been inserted. Thank you!');
           });
       };

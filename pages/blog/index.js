@@ -138,7 +138,20 @@ export async function getServerSideProps(context) {
 
     try{
 
-        const blogs = (await getBlogs()) || [];
+        var blogs = (await getBlogs()) || [];
+        //console.log(blogs)
+
+        if(Number(session.privaleges) === 1){
+            blogs = blogs.filter((el) => {
+                return el.brand.brandName == 'Classic Rope' || el.brand.brandName == 'Rattler' 
+            });
+        }
+
+        if(Number(session.privaleges) === 2){
+            blogs = blogs.filter((el) => {
+                return el.brand.brandName == 'Classic Rope' || el.brand.brandName == 'Rattler' || el.brand.brandName == 'Cashel'
+            });
+        }
 
         
         const pages = await prisma.customers_Messages.findMany({
