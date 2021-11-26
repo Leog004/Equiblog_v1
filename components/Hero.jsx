@@ -28,14 +28,14 @@ export default function Hero() {
             
             <div className="flex h-full justify-between items-center max-w-6xl mx-auto my-0">
             {/* Welcome Texts */}
-                <div className="flex flex-col justify-center items-baseline px-6 py-3 self-end mb-32 w-2/3">
+                <div className="flex flex-col justify-center items-baseline px-6 py-3 self-end mb-32 lg:w-2/3 w-full">
                     <button className="bg-red-400 px-6 py-1 rounded-md drop-shadow-md mb-4 text-white font-semibold text-sm">Rattler</button>
                     <h1 style={{textShadow: '0 2px 4px rgba(0,0,0,0.80)'}} className="text-5xl text-white font-semibold leading-normal"> THE CLASSIC DIFFERENCE IS HERE TO STAY </h1>
                 </div>
 
 
             {/* Featured Blogs */}
-            <div className="flex flex-col justify-center items-baseline w-1/3 gap-5">
+            <div className="hidden lg:flex flex-col justify-center items-baseline w-1/3 gap-5">
 
                 {
                     featuredPost.map((el) => (

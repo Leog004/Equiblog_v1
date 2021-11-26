@@ -17,15 +17,15 @@ export default function Featured({newBlogs, brands}) {
 
     return (
         <div className="py-20 px-0 max-w-6xl w-full mx-auto my-0">
-            <div className="flex">
-                <div className="flex flex-col w-2/3">
+            <div className="p-5 flex">
+                <div className="flex flex-col w-full lg:w-2/3">
                     <h1 className="text-gray-700 font-semibold text-xl mb-10">New Blogs</h1>
                     <div className="flex flex-wrap w-full gap-y-8 gap-x-3 justify-between">
 
                         {
                             newBlogs.map((el, index) => (
                                 <Link href={`/blog/${el.slug}`}>
-                                    <div className={`${index == 0 ? 'w-5/5' : 'w-60'} shadow-md rounded-xl px-6 py-6 bg-white cursor-pointer`}>
+                                    <div className={`${index == 0 ? 'w-5/5' : 'lg:w-60 w-full'} shadow-md rounded-xl px-6 py-6 bg-white cursor-pointer`}>
                                         <button className={`${getBorderColor(el.brand.brandName).replace('border', 'bg')} px-6 py-1 rounded-md drop-shadow-md mb-4 text-white font-semibold text-sm`}>{el.brand.brandName}</button>
                                         <h2 className="text-xl font-semibold my-5">{el.title}</h2>
                                         <p className="text-gray-600">Lorem markdownum illic venturi instructa nobis Echidnae, cum quid magna fatebor. Levat placetque…</p>
@@ -116,7 +116,7 @@ export default function Featured({newBlogs, brands}) {
 
                     </div>
                 </div>
-                <div className="flex flex-col w-1/3 gap-y-5">
+                <div className="hidden lg:flex flex-col w-1/3 gap-y-5">
                     <h1 className="text-gray-700 text-center font-semibold text-xl mb-10">Brands</h1>
                     
 

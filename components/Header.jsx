@@ -77,14 +77,14 @@ export default function Header() {
                 </div>
 
                 {/* // primary nav */}
-                  <div className="hidden md:inline-flex flex items-center space-x-1">
+                  <div className="hidden lg:inline-flex flex items-center space-x-1">
                     <Link href="/"><a className="py-5 px-3 text-gray-400 text-sm font-semibold hover:text-gray-900">Home</a></Link> 
                     <div onMouseLeave={handleDropDownAway} className='relative m-0 p-0'>
                     <a href="#" onClick={handleDropDown} className="py-5 px-3 text-gray-400 text-sm font-semibold hover:text-gray-900">
                         Our Brands &darr;
                     </a>
                         <div id="dropdown" className="shadow-xl absolute top-0 bg-white w-1/8 flex flex-col hidden">
-                            <h1 className='text-left pb-12 pt-1 px-2 text-gray-700 font-semibold text-sm'>Our Brands &darr;</h1>
+                            <span className='text-left pb-12 pt-1 px-2 text-gray-700 font-semibold text-sm'>Our Brands &darr;</span>
                             <hr/>
                             <a href="https://classicequine.com" target="_blank" className="py-5 z-50 px-3 hover:bg-blue-100 text-gray-400 text-sm font-semibold hover:text-gray-900">
                                 <img className='w-auto h-4' src="https://classicequine.com/ce/assets/images/logo-ce-color.svg" />

@@ -15,15 +15,15 @@ const LinearGradientBlogs = 'linear-gradient(rgb(238 238 238 / 26%) 25%, rgb(51,
 export default function FeatredBlogs({featuredBlogs}) {
 
     return (
-        <div className="h-xxl" style={{backgroundImage: `${LinearGradient}, url(${BackgroundImage})`}}>
+        <div className="h-full lg:h-xxl pb-10 md:pb-0" style={{backgroundImage: `${LinearGradient}, url(${BackgroundImage})`}}>
             <h1 className="py-20 font-semibold text-3xl text-center">Featured Blogs</h1>
-            <div className="grid grid-cols-4 gap-x-1">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-1 gap-y-10 md:gap-y-0">
         
 
                 {
 
                     featuredBlogs.map((el) => (
-                        <div className='bg-white mx-3.5 shadow-md rounded-2xl overflow-hidden bg-cover bg-center hover:shadow-2xl hover:-translate-x-0.5 hover:-translate-y-10 transition duration-500 cursor-pointer' style={{backgroundImage: `${LinearGradientBlogs}, url(${el.blogImage.url})`, height: '30rem'}}>
+                        <div className='bg-white mx-3.5 shadow-md rounded-2xl overflow-hidden bg-cover bg-center hover:shadow-2xl hover:-translate-x-0.5 hover:-translate-y-10 transition duration-500 cursor-pointer h-md  md:h-lg' style={{backgroundImage: `${LinearGradientBlogs}, url(${el.blogImage.url})`}}>
                              <div className="flex flex-col h-full items-start py-10 px-10 justify-end">
                                  <h1 className='text-white text-xl font-semibold capitalize'>{el.title}</h1>
                                  <Link href={`/blog/${el.slug}`}>

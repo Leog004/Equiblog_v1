@@ -72,7 +72,7 @@ export default function Subscribe() {
 
     return (
         <div className='h-full max-w-6xl py-4 px-0 w-full mx-auto my-0 rounded-2xl'>
-            <div className='p-20 bg-white my-20 rounded-xl'>
+            <div className='p-10 md:p-20 bg-white my-20 rounded-xl'>
                 <div className='flex flex-col'>
                     <h1 className='text-3xl font-semibold text-center w-full'>Subscribe to our newsletter!</h1>
                     <p className='text-light text-center mt-5 text-gray-700'>We'll send you the best of our blog just once a month. We promise.</p>
